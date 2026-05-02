@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:       #f5f6f8;
+  --surface:  #ffffff;
+  --line:     #e4e6eb;
+  --muted:    #c1c5d0;
+  --text-1:   #111318;
+  --text-2:   #5a6070;
+  --text-3:   #9399a8;
+  --accent:   #6366f1;
+  --accent-h: #4f52d4;
+  --red:      #ef4444;
+  --green:    #16a34a;
+  --yellow:   #ca8a04;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text-1);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 4px; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.animate-fade-in { animation: fadeUp 0.22s ease both; }
+.animate-spin    { animation: spin 0.75s linear infinite; }
+
+@layer utilities {
+
+  /* ── Cards ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+  }
+
+  /* legacy aliases */
+  .glass-card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+  .surface    { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+
+  .card-hover { transition: border-color 0.15s; }
+  .card-hover:hover { border-color: var(--muted); }
+
+  /* ── Inputs ── */
+  .input-dark {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    color: var(--text-1);
+    border-radius: 8px;
+    font-size: 15px;
+    transition: border-color 0.15s;
+  }
+  .input-dark:hover  { border-color: var(--muted); }
+  .input-dark:focus  { border-color: var(--accent); outline: none; box-shadow: 0 0 0 2px rgba(99,102,241,0.15); }
+  .input-dark::placeholder { color: var(--text-3); }
+  .input-dark[type="date"] { color-scheme: dark; }
+  .input-dark[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.5); cursor: pointer; }
+  .input-dark option { background: var(--surface); color: var(--text-1); }
+
+  /* ── Buttons ── */
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    font-weight: 500;
+    font-size: 15px;
+    border-radius: 8px;
+    transition: background 0.15s;
+  }
+  .btn-primary:hover:not(:disabled) { background: var(--accent-h); }
+  .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .btn-ghost {
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--text-2);
+    font-size: 15px;
+    border-radius: 8px;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .btn-ghost:hover { border-color: var(--muted); color: var(--text-1); }
+
+  /* ── Status ── */
+  .status-todo       { background: #f1f2f5; color: #5a6070; border: 1px solid var(--line); }
+  .status-inprogress { background: #eef0fd; color: #4f52d4; border: 1px solid #c7c9f7; }
+  .status-done       { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
+
+  /* ── Priority ── */
+  .priority-high   { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+  .priority-medium { background: #fefce8; color: #ca8a04; border: 1px solid #fde68a; }
+  .priority-low    { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
+
+  /* ── Misc ── */
+  .modal-backdrop {
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(3px);
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+  .gradient-text  { color: var(--text-1); } /* no gradient — minimal */
+  .dot-active { width: 6px; height: 6px; border-radius: 99px; background: #16a34a; }
+}
